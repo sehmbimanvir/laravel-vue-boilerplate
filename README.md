@@ -1,9 +1,24 @@
-# Laravel-Vue-Boilerplate
+# Laravel & Vue Js Boilerplate
+Laravel, Vue js boilerplate with Eslint validator and Hot Reloading. Project contains a Simple CRUD for posts with Vue js Basic routing.
 
-Steps to Install
+# Installation
+Clone this Repo
 
-`composer install`
+In Project Root Directory, Run
+```sh
+composer install
+```
+Generate Laravel Encryption Key
+```sh
+php artisan key:generate
+```
 
-`npm install`
+Install Node Packages
+```sh
+npm install
+```
 
-`php artisan migrate --seed`
+Run DB Migrations & Seeds
+```sh
+php artisan migrate --seed
+```
