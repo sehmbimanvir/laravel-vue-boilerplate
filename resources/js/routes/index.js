@@ -4,6 +4,7 @@ import Home from '../components/Home'
 import About from '../components/About'
 import ListPost from '../components/Posts/ListPost'
 import AddPost from '../components/Posts/AddPost'
+import Login from '../components/Auth/Login'
 
 Vue.use(VueRouter)
 
@@ -43,6 +44,13 @@ const routes = new VueRouter({
             component: AddPost,
             meta: {
                 title: 'Edit Post'
+            }
+        }, {
+            path: '/login',
+            name: 'Login',
+            component: Login,
+            meta: {
+                title: 'Login'
             }
         }
     ],

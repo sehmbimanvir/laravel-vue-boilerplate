@@ -21,11 +21,11 @@ mix.webpackConfig({
       }]
    }
 })
+
 mix.js('resources/js/app.js', 'public/js')
 .sass('resources/sass/app.scss', 'public/css')
 .extract(['vue'])
 
-// mix.browserSync('laravel-blog.test')
 mix.browserSync({
    proxy: 'laravel-blog.test',
    notify: false

@@ -39,7 +39,7 @@
   </div>
 </template>
 <script>
-import { HTTP } from '../../services/Http'
+import { HTTP } from '../../services/http'
 export default {
   data () {
     return {
