@@ -15,7 +15,7 @@ export const Storage = {
     },
 
     getJSON (key) {
-        let data = this.get(this.getKey(key))
+        let data = this.get(key)
         return JSON.parse(data)
     },
 

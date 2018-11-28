@@ -12,9 +12,16 @@
           <li :class="{'active': currentRoute('About')}">
             <router-link :to="{name: 'About'}">About</router-link>
           </li>
-          <li :class="{'active': currentRoute('Login')}">
-            <router-link :to="{name: 'Login'}">Login</router-link>
-          </li>
+          <template v-if="!isLoggedIn">
+            <li :class="{'active': currentRoute('Login')}">
+              <router-link :to="{name: 'Login'}">Login</router-link>
+            </li>
+          </template>
+          <template v-else>
+            <li>
+              <a href="#">{{ user.name }}</a>
+            </li>
+          </template>
         </ul>
       </div>
     </nav>
@@ -32,6 +39,9 @@ export default {
     },
     isLoggedIn () {
       return this.$store.getters['AuthStore/isLoggedIn']
+    },
+    user () {
+      return this.$store.getters['AuthStore/user']
     }
   },
   watch: {

@@ -45,7 +45,9 @@ const actions = {
 
 const getters = {
   credentials: state => state.credentials,
-  user: state => state.user,
+  user: state => {
+    return state.user
+  },
   token: state => state.token,
   isLoggedIn: state => state.isLoggedIn
 }

@@ -5,6 +5,11 @@ import About from '../components/About'
 import ListPost from '../components/Posts/ListPost'
 import AddPost from '../components/Posts/AddPost'
 import Login from '../components/Auth/Login'
+import Dashboard from '../components/User/Dashboard'
+import Store from '../stores/index'
+import { Storage } from '../services/storage'
+import { AuthGuard } from '../middleware/auth'
+import { GuestGuard } from '../middleware/guest'
 
 Vue.use(VueRouter)
 
@@ -49,8 +54,17 @@ const routes = new VueRouter({
             path: '/login',
             name: 'Login',
             component: Login,
+            beforeEnter: GuestGuard,
             meta: {
                 title: 'Login'
+            }
+        }, {
+            path: '/dashboard',
+            name: 'Dashboard',
+            component: Dashboard,
+            beforeEnter: AuthGuard,
+            meta: {
+                title: 'Dashboard'
             }
         }
     ],
@@ -58,6 +72,11 @@ const routes = new VueRouter({
 })
 
 routes.beforeEach((to, from, next) => {
+    if (Storage.get('token') && Storage.get('user')) {
+        Store.commit('AuthStore/SETUSER', Storage.getJSON('user'))
+    } else {
+        Store.commit('AuthStore/UNSETUSER')
+    }
     document.title = to.meta.title ? to.meta.title : 'Untitled'
     next()
 })
