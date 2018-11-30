@@ -119,6 +119,8 @@ class LoginController extends Controller
      */
     protected function loggedOut(Request $request)
     {
-        return response()->return('Logged Out Successfully');
+        return response()->json([
+            'message' => 'Logged Out Successfully'
+        ], 200);
     }
 }

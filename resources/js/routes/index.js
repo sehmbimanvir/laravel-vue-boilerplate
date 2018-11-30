@@ -6,8 +6,7 @@ import ListPost from '../components/Posts/ListPost'
 import AddPost from '../components/Posts/AddPost'
 import Login from '../components/Auth/Login'
 import Dashboard from '../components/User/Dashboard'
-import Store from '../stores/index'
-import { Storage } from '../services/storage'
+import NotFound from '../components/404'
 import { AuthGuard } from '../middleware/auth'
 import { GuestGuard } from '../middleware/guest'
 
@@ -33,6 +32,7 @@ const routes = new VueRouter({
             path: '/posts',
             name: 'ListPost',
             component: ListPost,
+            beforeEnter: AuthGuard,
             meta: {
                 title: 'All Posts'
             }
@@ -66,17 +66,16 @@ const routes = new VueRouter({
             meta: {
                 title: 'Dashboard'
             }
+        }, {
+            path: '*',
+            name: 'NotFound',
+            component: NotFound
         }
     ],
     mode: 'history'
 })
 
 routes.beforeEach((to, from, next) => {
-    if (Storage.get('token') && Storage.get('user')) {
-        Store.commit('AuthStore/SETUSER', Storage.getJSON('user'))
-    } else {
-        Store.commit('AuthStore/UNSETUSER')
-    }
     document.title = to.meta.title ? to.meta.title : 'Untitled'
     next()
 })

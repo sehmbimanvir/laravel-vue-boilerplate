@@ -1,10 +1,11 @@
 <template>
   <div class="container">
     <div class="row">
-      <h2>
-        <strong>Login</strong>
-      </h2>
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
+        <h2>
+          <strong>Login</strong>
+          <hr>
+        </h2>
         <form>
           <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
@@ -32,12 +33,17 @@
             <button @click="login()" type="button" class="btn btn-primary">Submit</button>
           </div>
         </form>
+        <error-message :route="$route.params.type" :message="$route.params.message"/>
       </div>
     </div>
   </div>
 </template>
 <script>
+import ErrorMessage from '../ErrorMessage'
 export default {
+  components: {
+    ErrorMessage
+  },
   computed: {
     credentials () {
       return this.$store.getters['AuthStore/credentials']

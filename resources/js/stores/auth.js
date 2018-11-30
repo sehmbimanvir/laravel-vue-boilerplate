@@ -8,13 +8,13 @@ const state = {
     password: null
   },
   user: {},
-  token: null,
-  isLoggedIn: false
+  token: Storage.get('token'),
+  isLoggedIn: Storage.get('token') || false
 }
 
 const mutations = {
-  'RESETLOGINCREDENTIALS' (state) {
-      state.login = {
+  'RESETCREDENTIALS' (state) {
+      state.credentials = {
         email: null,
         password: null
       }
@@ -35,9 +35,16 @@ const actions = {
   login: ({ commit }, user) => {
       return HTTP.post('login', user).then(response => {
         let data = response.data.data
+        commit('RESETCREDENTIALS')
         commit('SETUSER', data)
         Storage.setJSON('user', data)
         Storage.set('token', data.token)
+        return response
+      })
+  },
+  logout: ({ commit }) => {
+      return HTTP.post('logout', {}).then(response => {
+        commit('UNSETUSER')
         return response
       })
   }
@@ -45,9 +52,7 @@ const actions = {
 
 const getters = {
   credentials: state => state.credentials,
-  user: state => {
-    return state.user
-  },
+  user: state => state.user,
   token: state => state.token,
   isLoggedIn: state => state.isLoggedIn
 }

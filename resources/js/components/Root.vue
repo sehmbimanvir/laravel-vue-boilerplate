@@ -19,7 +19,10 @@
           </template>
           <template v-else>
             <li>
-              <a href="#">{{ user.name }}</a>
+              <router-link :to="{ name: 'ListPost' }">Posts</router-link>
+            </li>
+            <li>
+              <a href="javascript:void(0);" @click="logout()">Logout</a>
             </li>
           </template>
         </ul>
@@ -47,7 +50,12 @@ export default {
   watch: {
     catchError (error) {
       let response = error.response
-      alert(response.data.message)
+      if (response.status === 401) {
+        this.$store.commit('AuthStore/UNSETUSER')
+        this.$router.push({ name: 'Login', params: { message: 'Unauthorized' } })
+      } else {
+        console.log('Error', response)
+      }
     }
   },
   created () {
@@ -55,6 +63,17 @@ export default {
   methods: {
     currentRoute (name) {
       return this.$route.name === name
+    },
+    logout () {
+      this.$store.dispatch('AuthStore/logout').then(response => {
+        this.$router.push({
+          name: 'Login',
+          params: {
+            type: 'success',
+            message: response.data.message
+          }
+        })
+      })
     }
   }
 }
