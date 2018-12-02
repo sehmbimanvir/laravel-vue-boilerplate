@@ -1,33 +1,26 @@
-import { Storage } from '../services/storage'
 import { HTTP } from '../services/http'
+import { Storage } from '../services/storage'
 const namespaced = true
 
 const state = {
-  credentials: {
-    email: null,
-    password: null
-  },
-  user: {},
+  user: Storage.getJSON('user'),
   token: Storage.get('token'),
   isLoggedIn: Storage.get('token') || false
 }
 
 const mutations = {
-  'RESETCREDENTIALS' (state) {
-      state.credentials = {
-        email: null,
-        password: null
-      }
-  },
   'SETUSER' (state, data) {
       state.token = data.token
       state.user = data
       state.isLoggedIn = true
+      Storage.setJSON('user', data)
+      Storage.set('token', data.token)
   },
   'UNSETUSER' (state) {
     state.token = null
     state.user = {}
     state.isLoggedIn = false
+    Storage.remove(['token', 'user'])
   }
 }
 
@@ -35,10 +28,7 @@ const actions = {
   login: ({ commit }, user) => {
       return HTTP.post('login', user).then(response => {
         let data = response.data.data
-        commit('RESETCREDENTIALS')
         commit('SETUSER', data)
-        Storage.setJSON('user', data)
-        Storage.set('token', data.token)
         return response
       })
   },
@@ -47,11 +37,15 @@ const actions = {
         commit('UNSETUSER')
         return response
       })
+  },
+  register: ({ commit }, data) => {
+    return HTTP.post('register', data).then(response => {
+      return response
+    })
   }
 }
 
 const getters = {
-  credentials: state => state.credentials,
   user: state => state.user,
   token: state => state.token,
   isLoggedIn: state => state.isLoggedIn

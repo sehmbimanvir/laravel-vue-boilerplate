@@ -1,6 +1,6 @@
 import Axios from 'axios'
-import { Storage } from '../services/storage'
 import Store from '../stores/index'
+import { Storage } from '../services/storage'
 
 const HTTP = Axios.create({
     baseURL: 'http://laravel-blog.test/api/'

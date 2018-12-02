@@ -21,5 +21,15 @@ export const Storage = {
 
     getKey (key) {
         return `${this.prefix}_${key}`
+    },
+
+    remove (key) {
+        if (Array.isArray(key)) {
+            key.forEach(value => {
+                localStorage.removeItem(this.getKey(value))
+            })
+        } else {
+            localStorage.removeItem(this.getKey(key))
+        }
     }
 }

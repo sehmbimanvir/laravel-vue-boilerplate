@@ -52,10 +52,11 @@ export default {
       let response = error.response
       if (response.status === 401) {
         this.$store.commit('AuthStore/UNSETUSER')
-        this.$router.push({ name: 'Login', params: { message: 'Unauthorized' } })
-      } else {
-        console.log('Error', response)
       }
+      this.$toast.error({
+        title: 'Error',
+        message: response.data.message
+      })
     }
   },
   created () {
@@ -66,13 +67,10 @@ export default {
     },
     logout () {
       this.$store.dispatch('AuthStore/logout').then(response => {
-        this.$router.push({
-          name: 'Login',
-          params: {
-            type: 'success',
-            message: response.data.message
-          }
+        this.$toast.success({
+          title: 'Success', message: response.data.message
         })
+        this.$router.push({ name: 'Login' })
       })
     }
   }

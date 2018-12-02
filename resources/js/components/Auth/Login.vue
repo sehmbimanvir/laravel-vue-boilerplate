@@ -1,31 +1,27 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
+      <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
         <h2>
           <strong>Login</strong>
           <hr>
         </h2>
         <form>
           <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
+            <label>Email address</label>
             <input
               v-model="credentials.email"
               type="email"
               class="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
               placeholder="Enter email"
             >
           </div>
           <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
+            <label>Password</label>
             <input
               v-model="credentials.password"
               type="password"
               class="form-control"
-              name="password"
-              id="password"
               placeholder="Password"
             >
           </div>
@@ -33,27 +29,36 @@
             <button @click="login()" type="button" class="btn btn-primary">Submit</button>
           </div>
         </form>
-        <error-message :route="$route.params.type" :message="$route.params.message"/>
+        <div class="row">
+          <div class="col-sm-12">
+            <h5>
+              <router-link :to="{ name: 'ForgotPassword' }">Forgot Password ?</router-link>
+            </h5>
+            <h5>Not Registered Yet ?
+              <router-link :to="{name: 'Register'}">Click Here&nbsp;</router-link>to Register
+            </h5>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import ErrorMessage from '../ErrorMessage'
 export default {
-  components: {
-    ErrorMessage
-  },
-  computed: {
-    credentials () {
-      return this.$store.getters['AuthStore/credentials']
+  data () {
+    return {
+      credentials: {
+        email: 'admin@gmail.com',
+        password: 'secret'
+      }
     }
   },
-  created () { },
+  created () {
+  },
   methods: {
     login () {
       this.$store.dispatch('AuthStore/login', this.credentials).then(response => {
-        this.$router.push({ name: 'Dashboard' })
+        this.$router.push({ name: 'Home' })
       })
     }
   }

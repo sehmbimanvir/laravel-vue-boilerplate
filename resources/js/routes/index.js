@@ -5,8 +5,9 @@ import About from '../components/About'
 import ListPost from '../components/Posts/ListPost'
 import AddPost from '../components/Posts/AddPost'
 import Login from '../components/Auth/Login'
-import Dashboard from '../components/User/Dashboard'
 import NotFound from '../components/404'
+import Register from '../components/Auth/Register'
+import ForgotPassword from '../components/Auth/ForgotPassword'
 import { AuthGuard } from '../middleware/auth'
 import { GuestGuard } from '../middleware/guest'
 
@@ -59,12 +60,20 @@ const routes = new VueRouter({
                 title: 'Login'
             }
         }, {
-            path: '/dashboard',
-            name: 'Dashboard',
-            component: Dashboard,
-            beforeEnter: AuthGuard,
+            path: '/register',
+            name: 'Register',
+            component: Register,
+            beforeEnter: GuestGuard,
             meta: {
-                title: 'Dashboard'
+                title: 'Register'
+            }
+        }, {
+            path: '/forgot',
+            name: 'ForgotPassword',
+            component: ForgotPassword,
+            beforeEnter: GuestGuard,
+            meta: {
+                title: 'ForgotPassword'
             }
         }, {
             path: '*',

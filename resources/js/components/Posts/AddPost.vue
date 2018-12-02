@@ -7,12 +7,23 @@
     </div>
     <div class="row">
       <div class="col-sm-12">
-        <form action="" method="post">
+        <form action method="post">
           <div class="form-group">
-            <input id="title" v-model="post.title" placeholder="Title" type="text" class="form-control">
+            <input
+              id="title"
+              v-model="post.title"
+              placeholder="Title"
+              type="text"
+              class="form-control"
+            >
           </div>
           <div class="form-group">
-            <textarea id="description" v-model="post.description" class="form-control" placeholder="Description"/>
+            <textarea
+              id="description"
+              v-model="post.description"
+              class="form-control"
+              placeholder="Description"
+            />
           </div>
           <button type="button" class="btn btn-primary" @click="savePost()">Save</button>
           <router-link class="btn btn-warning" :to="{name: 'ListPost'}">Back</router-link>
@@ -55,7 +66,10 @@ export default {
         }
       })
       promise.then(response => {
-        alert(response.message)
+        this.$toast.success({
+          title: 'Success',
+          message: response.message
+        })
         this.$router.push({ name: 'ListPost' })
       })
     }

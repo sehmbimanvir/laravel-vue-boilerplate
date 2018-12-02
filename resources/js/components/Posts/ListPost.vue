@@ -14,24 +14,27 @@
         <table class="table table-bordered table-condensed">
           <thead>
             <tr>
-            <th width="5%">ID</th>
-            <th width="20%">Title</th>
-            <th width="10%">Added On</th>
-            <th width="55%">Description</th>
-            <th width="10%"/>
-          </tr>
+              <th width="5%">ID</th>
+              <th width="20%">Title</th>
+              <th width="10%">Added On</th>
+              <th width="55%">Description</th>
+              <th width="10%"/>
+            </tr>
           </thead>
           <tbody>
-          <tr v-for="(post, index) in posts" :key="index">
+            <tr v-for="(post, index) in posts" :key="index">
               <td>{{ post.id }}</td>
               <td>{{ post.title }}</td>
               <td>{{ post.created_on }}</td>
               <td>{{ post.description }}</td>
               <td>
-                <router-link :to="{name: 'EditPost', params: {id: post.id}}" class="btn btn-warning btn-xs">Edit</router-link>
+                <router-link
+                  :to="{name: 'EditPost', params: {id: post.id}}"
+                  class="btn btn-warning btn-xs"
+                >Edit</router-link>
                 <button @click="deletePost(post.id, index)" class="btn btn-danger btn-xs">Delete</button>
               </td>
-          </tr>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -59,8 +62,11 @@ export default {
       let e = confirm('Delete Post. Are you Sure ?')
       if (e) {
         HTTP.delete(`post/${postId}`).then(response => {
-          alert(response.data.message)
           this.posts.splice(index, 1)
+          this.$toast.success({
+            title: 'Success',
+            message: response.data.message
+          })
         })
       }
     }

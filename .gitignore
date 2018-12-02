@@ -3,6 +3,7 @@
 /public/storage
 /public/js/app.js
 /public/js/vendor.js
+/public/js/manifest.js
 /storage/*.key
 /vendor
 /.idea
