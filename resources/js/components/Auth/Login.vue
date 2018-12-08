@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
+      <div class="col-md-6 offset-md-3">
         <h2>
           <strong>Login</strong>
           <hr>
@@ -25,7 +25,7 @@
               placeholder="Password"
             >
           </div>
-          <div class="form-check">
+          <div class="form-group">
             <button @click="login()" type="button" class="btn btn-primary">Submit</button>
           </div>
         </form>

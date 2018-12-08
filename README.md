@@ -55,9 +55,6 @@ mix.webpackConfig({
 ```
 You can also delete all dependencies regarding eslint.
 
-### * Ignore Specific Rule for Eslint
-
-
 ### * Disable Vendor Extraction
 Currently Webpack Mix generate two different files 
 * app.js - Application Code

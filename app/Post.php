@@ -14,4 +14,17 @@ class Post extends Model
     {
         return $this->created_at->diffForHumans();
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User', 'user_id');
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+        static::creating(function ($post) {
+            $post->user_id = auth()->user()->id;
+        });
+    }
 }

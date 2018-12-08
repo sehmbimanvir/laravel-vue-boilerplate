@@ -3,7 +3,6 @@
     <h1>Vue + Laravel Boilerplate</h1>
     <template v-if="isLoggedIn">
       <h3>Welcome, {{ user.name }}</h3>
-      <button type="button">Click Here</button>
     </template>
   </div>
 </template>

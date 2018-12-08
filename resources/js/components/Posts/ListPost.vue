@@ -15,10 +15,11 @@
           <thead>
             <tr>
               <th width="5%">ID</th>
-              <th width="20%">Title</th>
+              <th width="15%">Title</th>
               <th width="10%">Added On</th>
-              <th width="55%">Description</th>
-              <th width="10%"/>
+              <th width="10%">By</th>
+              <th width="45%">Description</th>
+              <th width="15%"/>
             </tr>
           </thead>
           <tbody>
@@ -26,13 +27,18 @@
               <td>{{ post.id }}</td>
               <td>{{ post.title }}</td>
               <td>{{ post.created_on }}</td>
+              <td>{{ post.user.name }}</td>
               <td>{{ post.description }}</td>
               <td>
                 <router-link
                   :to="{name: 'EditPost', params: {id: post.id}}"
-                  class="btn btn-warning btn-xs"
+                  class="badge badge-warning"
                 >Edit</router-link>
-                <button @click="deletePost(post.id, index)" class="btn btn-danger btn-xs">Delete</button>
+                <a
+                  href="javascript:void(0);"
+                  @click="deletePost(post.id, index)"
+                  class="badge badge-danger"
+                >Delete</a>
               </td>
             </tr>
           </tbody>
