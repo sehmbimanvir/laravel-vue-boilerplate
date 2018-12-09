@@ -16,7 +16,7 @@
               class="form-control input-sm"
             >
           </div>
-          <button class="btn btn-primary" type="button">Submit</button>
+          <button @click="forgot()" class="btn btn-primary" type="button">Submit</button>
         </form>
       </div>
     </div>
@@ -31,10 +31,12 @@ export default {
       }
     }
   },
-  computed: {},
   methods: {
-    onSubmit () {
-      alert('ABC')
+    forgot () {
+      this.$store.dispatch('AuthStore/sendResetPasswordLink', this.forgotPassword).then(response => {
+        this.forgotPassword.email = null
+        this.$toast.success({ title: 'Success', message: response.data.message })
+      })
     }
   }
 }

@@ -7,6 +7,7 @@ import AddPost from '../components/Posts/AddPost'
 import Login from '../components/Auth/Login'
 import NotFound from '../components/404'
 import Register from '../components/Auth/Register'
+import ResetPassword from '../components/Auth/ResetPassword'
 import ForgotPassword from '../components/Auth/ForgotPassword'
 import { AuthGuard } from '../middleware/auth'
 import { GuestGuard } from '../middleware/guest'
@@ -73,7 +74,15 @@ const routes = new VueRouter({
             component: ForgotPassword,
             beforeEnter: GuestGuard,
             meta: {
-                title: 'ForgotPassword'
+                title: 'Forgot Password'
+            }
+        }, {
+            path: '/reset/:token',
+            name: 'ResetPassword',
+            component: ResetPassword,
+            beforeEnter: GuestGuard,
+            meta: {
+                title: 'Reset Password'
             }
         }, {
             path: '*',

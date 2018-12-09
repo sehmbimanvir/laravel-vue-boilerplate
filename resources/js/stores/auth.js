@@ -42,6 +42,16 @@ const actions = {
     return HTTP.post('register', data).then(response => {
       return response
     })
+  },
+  sendResetPasswordLink: ({ commit }, data) => {
+    return HTTP.post('password/email', data).then(response => {
+      return response
+    })
+  },
+  resetPassword: ({ commit }, data) => {
+    return HTTP.post('password/reset', data).then(response => {
+      return response
+    })
   }
 }
 

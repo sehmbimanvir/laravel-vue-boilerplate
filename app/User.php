@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use App\Notifications\ResetPassword;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -55,5 +56,13 @@ class User extends Authenticatable implements JWTSubject
     public function posts()
     {
         return $this->hasMany('App\User');
+    }
+
+    /**
+     * Override Send Password Notification Email
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPassword($token));
     }
 }

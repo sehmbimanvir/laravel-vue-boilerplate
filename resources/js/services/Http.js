@@ -2,8 +2,10 @@ import Axios from 'axios'
 import Store from '../stores/index'
 import { Storage } from '../services/storage'
 
+const API_PATH = 'api'
+
 const HTTP = Axios.create({
-    baseURL: 'http://laravel-blog.test/api/'
+    baseURL: `${window.location.protocol}//${window.location.host}/${API_PATH}`
 })
 
 HTTP.interceptors.response.use(success => {
@@ -18,6 +20,4 @@ HTTP.interceptors.request.use(config => {
     return config
 })
 
-export {
-    HTTP
-}
+export { HTTP }

@@ -1,5 +1,17 @@
 # Laravel & Vue Js Boilerplate
-Laravel, Vue js boilerplate with Eslint validator and Hot Reloading. Project contains a Simple CRUD for posts with Vue js Basic routing.
+Laravel Single Page Application Using Vue 2.5, Typescript, Eslint, Babel, SCSS etc.
+
+# Features
+- Easily Configurable
+- Single Page
+- Hot Reloading Enabled
+- Laravel Complete JWT Authentication Including Forgot Password, Account Activation etc.
+- Basic CRUD
+- Eslint Included for enforcing coding styles.
+- Custom Component and Plugin which can help developers to create their own plugins
+- Complete error handling at single place on front as well as back end
+- Axios Plugin for HTTP requests with interceptors
+- Namespaced State Management (Vuex) Implemented
 
 # Installation
 Clone this Repo
@@ -7,10 +19,6 @@ Clone this Repo
 In Project Root Directory, Run
 ```sh
 composer install
-```
-Generate Laravel Encryption Key
-```sh
-php artisan key:generate
 ```
 
 Install Node Packages

@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Http\Request;
+use Illuminate\Auth\Passwords\TokenRepositoryInterface;
+use Illuminate\Support\Facades\Password;
 
 class ResetPasswordController extends Controller
 {
@@ -16,7 +19,7 @@ class ResetPasswordController extends Controller
     | and uses a simple trait to include this behavior. You're free to
     | explore this trait and override any methods you wish to tweak.
     |
-    */
+     */
 
     use ResetsPasswords;
 
@@ -27,6 +30,8 @@ class ResetPasswordController extends Controller
      */
     protected $redirectTo = '/home';
 
+    private $token;
+
     /**
      * Create a new controller instance.
      *
@@ -35,5 +40,24 @@ class ResetPasswordController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+    }
+
+    public function showResetForm(Request $request, $token = null)
+    {
+        abort(404);
+    }
+
+    protected function sendResetFailedResponse(Request $request, $response)
+    {
+        return response()->json([
+            'message' => trans($response)
+        ], 400);
+    }
+
+    protected function sendResetResponse(Request $request, $response)
+    {
+        return response()->json([
+            'message' => trans($response)
+        ], 200);
     }
 }

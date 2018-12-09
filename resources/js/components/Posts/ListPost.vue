@@ -11,38 +11,40 @@
     <hr>
     <div class="row">
       <div class="col-sm-12">
-        <table class="table table-bordered table-condensed">
-          <thead>
-            <tr>
-              <th width="5%">ID</th>
-              <th width="15%">Title</th>
-              <th width="10%">Added On</th>
-              <th width="10%">By</th>
-              <th width="45%">Description</th>
-              <th width="15%"/>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(post, index) in posts" :key="index">
-              <td>{{ post.id }}</td>
-              <td>{{ post.title }}</td>
-              <td>{{ post.created_on }}</td>
-              <td>{{ post.user.name }}</td>
-              <td>{{ post.description }}</td>
-              <td>
-                <router-link
-                  :to="{name: 'EditPost', params: {id: post.id}}"
-                  class="badge badge-warning"
-                >Edit</router-link>
-                <a
-                  href="javascript:void(0);"
-                  @click="deletePost(post.id, index)"
-                  class="badge badge-danger"
-                >Delete</a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="table-responsive">
+          <table class="table table-bordered table-condensed">
+            <thead>
+              <tr>
+                <th width="5%">ID</th>
+                <th width="15%">Title</th>
+                <th width="10%">Added On</th>
+                <th width="10%">By</th>
+                <th width="45%">Description</th>
+                <th width="15%"/>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(post, index) in posts" :key="index">
+                <td>{{ post.id }}</td>
+                <td>{{ post.title }}</td>
+                <td>{{ post.created_on }}</td>
+                <td>{{ post.user.name }}</td>
+                <td>{{ post.description }}</td>
+                <td>
+                  <router-link
+                    :to="{name: 'EditPost', params: {id: post.id}}"
+                    class="badge badge-warning"
+                  >Edit</router-link>
+                  <a
+                    href="javascript:void(0);"
+                    @click="deletePost(post.id, index)"
+                    class="badge badge-danger"
+                  >Delete</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
