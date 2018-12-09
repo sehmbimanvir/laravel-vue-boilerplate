@@ -1,60 +1,59 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-8">
-        <h1 class="title">All Posts</h1>
-      </div>
-      <div class="col-sm-4 pull-right text-right">
-        <router-link :to="{name: 'AddPost'}" class="btn btn-primary">Add Post</router-link>
-      </div>
-    </div>
-    <hr>
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="table-responsive">
-          <table class="table table-bordered table-condensed">
-            <thead>
-              <tr>
-                <th width="5%">ID</th>
-                <th width="15%">Title</th>
-                <th width="10%">Added On</th>
-                <th width="10%">By</th>
-                <th width="45%">Description</th>
-                <th width="15%"/>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="(post, index) in posts" :key="index">
-                <td>{{ post.id }}</td>
-                <td>{{ post.title }}</td>
-                <td>{{ post.created_on }}</td>
-                <td>{{ post.user.name }}</td>
-                <td>{{ post.description }}</td>
-                <td>
-                  <router-link
-                    :to="{name: 'EditPost', params: {id: post.id}}"
-                    class="badge badge-warning"
-                  >Edit</router-link>
-                  <a
-                    href="javascript:void(0);"
-                    @click="deletePost(post.id, index)"
-                    class="badge badge-danger"
-                  >Delete</a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
+  <b-container>
+    <b-row>
+      <b-col cols="8">
+        <h1>All Posts</h1>
+      </b-col>
+      <b-col cols="4" class="ml-auto text-right">
+        <b-button variant="outline-info" :to="{ name: 'AddPost' }">Add Post</b-button>
+      </b-col>
+    </b-row>
+
+    <b-row>
+      <b-col cols="12">
+        <b-table striped hover :items="posts" :fields="fields">
+          <template slot="actions" slot-scope="data">
+            <b-button-group>
+              <b-button
+                :to="{name: 'EditPost', params: {id: data.item.id}}"
+                size="sm"
+                variant="warning"
+              >Edit</b-button>
+              <b-button @click="deletePost(data.item.id)" size="sm" variant="danger">Delete</b-button>
+            </b-button-group>
+          </template>
+        </b-table>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 <script>
 import { HTTP } from '../../services/http'
 export default {
   data () {
     return {
-      posts: []
+      posts: [],
+      fields: [
+        {
+          key: 'id',
+          label: 'ID'
+        }, {
+          key: 'title',
+          label: 'Title'
+        }, {
+          key: 'created_on',
+          label: 'Added On'
+        }, {
+          key: 'user.name',
+          label: 'Added By'
+        }, {
+          key: 'description',
+          label: 'Desc.'
+        }, {
+          label: 'Actions',
+          key: 'actions'
+        }
+      ]
     }
   },
   created () {
@@ -66,10 +65,11 @@ export default {
         this.posts = response.data.data
       })
     },
-    deletePost (postId, index) {
+    deletePost (postId) {
       let e = confirm('Delete Post. Are you Sure ?')
       if (e) {
         HTTP.delete(`post/${postId}`).then(response => {
+          let index = this.posts.findIndex(post => post.id === postId)
           this.posts.splice(index, 1)
           this.$toast.success({
             title: 'Success',

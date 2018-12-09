@@ -1,54 +1,47 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6 offset-md-3">
-        <h2>
-          <strong>Register</strong>
-          <hr>
-        </h2>
-        <form>
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input v-model="register.name" type="text" id="name" class="form-control input-sm">
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input
-              v-model="register.email"
-              type="email"
-              name
-              id="email"
-              class="form-control input-sm"
-            >
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input
-              v-model="register.password"
-              required
-              type="password"
-              id="password"
-              class="form-control input-sm"
-            >
-          </div>
-          <div class="form-group">
-            <label for="password_confirmation">Confirm Password</label>
-            <input
-              v-model="register.password_confirmation"
-              required
-              type="password"
+  <b-container>
+    <b-row class="pb-3">
+      <b-col cols="6" offset-md="3">
+        <h2>Register</h2>
+      </b-col>
+    </b-row>
+
+    <b-row>
+      <b-col cols="6" offset-md="3">
+        <b-form @submit="onRegister">
+          <b-form-group label="Name" label-for="name">
+            <b-form-input id="name" type="text" v-model="register.name"/>
+          </b-form-group>
+
+          <b-form-group label="Email" label-for="email">
+            <b-form-input id="email" type="email" v-model="register.email"/>
+          </b-form-group>
+
+          <b-form-group label="Password" label-for="password">
+            <b-form-input id="password" type="password" v-model="register.password"/>
+          </b-form-group>
+
+          <b-form-group label="Confirm Password" label-for="password_confirmation">
+            <b-form-input
               id="password_confirmation"
-              class="form-control input-sm"
-            >
-          </div>
-          <button class="btn btn-primary" @click="onRegister()" type="button">Register</button>
-        </form>
-        <h4 class="text-center">Already Registered ?
+              type="password"
+              v-model="register.password_confirmation"
+            />
+          </b-form-group>
+
+          <b-button type="submit" variant="info">Register</b-button>
+        </b-form>
+      </b-col>
+    </b-row>
+
+    <b-row>
+      <b-col cols="6" offset-md="3">
+        <h6>Already Registered ?
           <router-link :to="{name: 'Login'}">Click Here&nbsp;</router-link>to Login
-        </h4>
-      </div>
-    </div>
-  </div>
+        </h6>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 <script>
 export default {
@@ -63,7 +56,8 @@ export default {
     }
   },
   methods: {
-    onRegister () {
+    onRegister (event) {
+      event.preventDefault()
       this.$store.dispatch('AuthStore/register', this.register).then(response => {
         this.$router.push({ name: 'Login', params: { type: 'success', message: response.data.message } })
       })

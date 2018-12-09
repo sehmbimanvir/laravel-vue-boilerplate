@@ -8,10 +8,10 @@ Laravel Single Page Application Using Vue 2.5, Typescript, Eslint, Babel, SCSS e
 - Laravel Complete JWT Authentication Including Forgot Password, Account Activation etc.
 - Basic CRUD
 - Eslint Included for enforcing coding styles.
-- Custom Component and Plugin which can help developers to create their own plugins
-- Complete error handling at single place on front as well as back end
-- Axios Plugin for HTTP requests with interceptors
-- Namespaced State Management (Vuex) Implemented
+- Custom Component and Plugin which can help developers to create their own plugins.
+- Complete error handling at single place on front as well as back end.
+- Axios Plugin for HTTP requests with interceptors.
+- Namespaced State Management (Vuex) Implemented.
 
 # Installation
 Clone this Repo
@@ -89,7 +89,7 @@ e.g: To disable lint for Unused variables Just add
 ```
 **Note:** 'off' can be replaced with 0 (Integer)
 
-We Used Two types of Rules 
+There are two types of rules used
 
 * [Eslint Standard Rules](https://eslint.org/docs/rules/)
 * [Eslint Vuejs Rules](https://www.npmjs.com/package/eslint-plugin-vue#bulb-rules)

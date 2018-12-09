@@ -1,36 +1,21 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-        <h1 class="title">Add New Post</h1>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12">
-        <form action method="post">
-          <div class="form-group">
-            <input
-              id="title"
-              v-model="post.title"
-              placeholder="Title"
-              type="text"
-              class="form-control"
-            >
-          </div>
-          <div class="form-group">
-            <textarea
-              id="description"
-              v-model="post.description"
-              class="form-control"
-              placeholder="Description"
-            />
-          </div>
-          <button type="button" class="btn btn-primary" @click="savePost()">Save</button>
-          <router-link class="btn btn-warning" :to="{name: 'ListPost'}">Back</router-link>
-        </form>
-      </div>
-    </div>
-  </div>
+  <b-container>
+    <h1>Add New Post</h1>
+    <b-row>
+      <b-col>
+        <b-form @submit="savePost">
+          <b-form-group>
+            <b-form-input placeholder="Title" type="text" v-model="post.title"/>
+          </b-form-group>
+          <b-form-group>
+            <b-form-textarea placeholder="Description" rows="3" v-model="post.description"/>
+          </b-form-group>
+          <b-button type="submit" variant="info">Save</b-button>
+          <b-button :to="{ name: 'ListPost' }" variant="outline-warning">Cancel</b-button>
+        </b-form>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 <script>
 import { HTTP } from '../../services/http'
@@ -53,7 +38,8 @@ export default {
     }
   },
   methods: {
-    savePost () {
+    savePost (event) {
+      event.preventDefault()
       let promise = new Promise(resolve => {
         if (!this.routeId) {
           HTTP.post('post', this.post).then(response => {

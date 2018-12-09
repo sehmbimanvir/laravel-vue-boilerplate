@@ -1,10 +1,10 @@
 <template>
-  <div class="container">
+  <b-container>
     <h1>404 Not Found</h1>
-    <div class="row">
-      <div class="col-sm-12 text-center">
-        <router-link :to="{ name: 'Home' }" class="btn btn-primary">Home</router-link>
-      </div>
-    </div>
-  </div>
+    <b-row>
+      <b-col text-center>
+        <b-button :to="{ name: 'Home' }" variant="outline-info">Go To Home</b-button>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>

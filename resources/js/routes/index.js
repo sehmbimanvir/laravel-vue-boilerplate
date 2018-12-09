@@ -9,6 +9,7 @@ import NotFound from '../components/404'
 import Register from '../components/Auth/Register'
 import ResetPassword from '../components/Auth/ResetPassword'
 import ForgotPassword from '../components/Auth/ForgotPassword'
+import Profile from '../components/User/Profile'
 import { AuthGuard } from '../middleware/auth'
 import { GuestGuard } from '../middleware/guest'
 
@@ -42,6 +43,7 @@ const routes = new VueRouter({
             path: '/posts/add',
             name: 'AddPost',
             component: AddPost,
+            beforeEnter: AuthGuard,
             meta: {
                 title: 'Add New Post'
             }
@@ -49,8 +51,17 @@ const routes = new VueRouter({
             path: '/posts/:id',
             name: 'EditPost',
             component: AddPost,
+            beforeEnter: AuthGuard,
             meta: {
                 title: 'Edit Post'
+            }
+        }, {
+            path: '/profile',
+            name: 'Profile',
+            component: Profile,
+            beforeEnter: AuthGuard,
+            meta: {
+                title: 'User Profile'
             }
         }, {
             path: '/login',

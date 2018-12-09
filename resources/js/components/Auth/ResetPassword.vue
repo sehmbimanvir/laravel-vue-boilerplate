@@ -1,44 +1,43 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6 offset-md-3">
-        <h2>
-          <strong>Reset Password</strong>
-          <hr>
-        </h2>
-        <form>
-          <div class="form-group">
-            <label for="email">Registered Email ID</label>
-            <input
-              v-model="resetPassword.email"
-              type="email"
-              id="email"
-              class="form-control input-sm"
-            >
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input
-              v-model="resetPassword.password"
+  <b-container>
+    <b-row class="mb-3">
+      <b-col cols="6" offset-md="3">
+        <h2>Reset Password</h2>
+      </b-col>
+    </b-row>
+
+    <b-row>
+      <b-col cols="6" offset-md="3">
+        <b-form @submit="reset">
+          <b-form-group label="Registered Email Id" label-for="email">
+            <b-form-input id="email" type="email" v-model="resetPassword.email"/>
+          </b-form-group>
+
+          <b-form-group label="Password" label-for="password">
+            <b-form-input id="password" type="password" v-model="resetPassword.password"/>
+          </b-form-group>
+
+          <b-form-group label="Confirm Password" label-for="password_confirmation">
+            <b-form-input
+              id="password_confirmation"
               type="password"
-              id="password"
-              class="form-control input-sm"
-            >
-          </div>
-          <div class="form-group">
-            <label for="confirm_password">Confirm Password</label>
-            <input
               v-model="resetPassword.password_confirmation"
-              type="password"
-              id="confirm_password"
-              class="form-control input-sm"
-            >
-          </div>
-          <button @click="reset()" class="btn btn-primary" type="button">Submit</button>
-        </form>
-      </div>
-    </div>
-  </div>
+            />
+          </b-form-group>
+
+          <b-button type="submit" variant="info">Reset</b-button>
+        </b-form>
+      </b-col>
+    </b-row>
+
+    <b-row>
+      <b-col cols="6" offset-md="3">
+        <h6>
+          <router-link :to="{name: 'Login'}">&laquo; Back To Login</router-link>
+        </h6>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 <script>
 export default {
@@ -53,7 +52,8 @@ export default {
     }
   },
   methods: {
-    reset () {
+    reset (event) {
+      event.preventDefault()
       this.$store.dispatch('AuthStore/resetPassword', this.resetPassword).then(response => {
         this.$toast.success({ title: 'Success', message: response.data.message })
         this.$router.push({ name: 'Login' })

@@ -1,9 +1,6 @@
 <template>
   <b-container>
-    <h1>Vue + Laravel Boilerplate</h1>
-    <template v-if="isLoggedIn">
-      <h3>Welcome, {{ user.name }}</h3>
-    </template>
+    <h2>{{ user.name }}'s Profile</h2>
   </b-container>
 </template>
 <script>
@@ -13,9 +10,7 @@ export default {
     return {}
   },
   computed: {
-    ...mapGetters('AuthStore', [
-      'user', 'isLoggedIn'
-    ])
+    ...mapGetters('AuthStore', ['user'])
   },
   created () {
   },

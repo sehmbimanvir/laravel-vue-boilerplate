@@ -1,41 +1,27 @@
 <template>
-  <nav class="navbar navbar-expand-sm bg-dark navbar-dark mb-4">
-    <router-link :to="{name: 'Home'}" class="navbar-brand">Laravel + Vue</router-link>
-    <button @click="toggleNavbar()" class="navbar-toggler" type="button">
-      <span class="navbar-toggler-icon"/>
-    </button>
-    <transition name="slide">
-      <div
-        class="collapse navbar-collapse"
-        id="navbarSupportedContent"
-        :class="{'show': collapsed}"
-      >
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item" :class="{'active': currentRoute('Home')}">
-            <router-link class="nav-link" :to="{name: 'Home'}">Home</router-link>
-          </li>
-          <li class="nav-item" :class="{'active': currentRoute('About')}">
-            <router-link class="nav-link" :to="{name: 'About'}">About</router-link>
-          </li>
-          <template v-if="!isLoggedIn">
-            <li class="nav-item" :class="{'active': currentRoute('Login')}">
-              <router-link class="nav-link" :to="{name: 'Login'}">Login</router-link>
-            </li>
-          </template>
-          <template v-else>
-            <li class="nav-item">
-              <router-link class="nav-link" :to="{ name: 'ListPost' }">Posts</router-link>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="javascript:void(0);" @click="logout()">Logout</a>
-            </li>
-          </template>
-        </ul>
-      </div>
-    </transition>
-  </nav>
+  <b-navbar toggleable="md" type="dark" class="mb-5" variant="info">
+    <b-navbar-toggle target="nav_collapse"/>
+    <b-navbar-brand :to="{ name: 'Home' }">Laravel + Vue</b-navbar-brand>
+    <b-collapse is-nav id="nav_collapse">
+      <b-navbar-nav class="ml-auto">
+        <b-nav-item :to="{name: 'About'}">About</b-nav-item>
+        <template v-if="!isLoggedIn">
+          <b-nav-item :to="{name: 'Login'}">Login</b-nav-item>
+        </template>
+        <template v-else>
+          <b-nav-item :to="{ name: 'ListPost' }">Posts</b-nav-item>
+          <b-nav-item-dropdown right>
+            <template slot="button-content">{{ user.name }}</template>
+            <b-dropdown-item :to="{ name: 'Profile' }">Profile</b-dropdown-item>
+            <b-dropdown-item @click="logout()" href="javascript:void(0);">Logout</b-dropdown-item>
+          </b-nav-item-dropdown>
+        </template>
+      </b-navbar-nav>
+    </b-collapse>
+  </b-navbar>
 </template>
 <script>
+import { mapGetters } from 'vuex'
 export default {
   data () {
     return {
@@ -43,9 +29,9 @@ export default {
     }
   },
   computed: {
-    isLoggedIn () {
-      return this.$store.getters['AuthStore/isLoggedIn']
-    }
+    ...mapGetters('AuthStore', [
+      'user', 'isLoggedIn'
+    ])
   },
   methods: {
     toggleNavbar () {
