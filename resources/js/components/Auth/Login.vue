@@ -40,7 +40,7 @@ export default {
     return {
       credentials: {
         email: 'admin@gmail.com',
-        password: 'secret'
+        password: '123456'
       }
     }
   },

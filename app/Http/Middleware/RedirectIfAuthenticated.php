@@ -18,9 +18,8 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return $this->isApiGuard($guard) ? response()->json([
-                'message' => 'Already Logged In'
-            ], 400) : redirect('/home');
+            return $this->isApiGuard($guard) ? response()->send('Already Logged In', [], 400)
+                : redirect('/home');
         }
 
         return $next($request);

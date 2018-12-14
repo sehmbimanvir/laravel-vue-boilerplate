@@ -72,10 +72,7 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         $user->token = JWTAuth::fromUser($user);
-        return response()->json([
-            'data' => $user,
-            'message' => 'User Logged In Successfully'
-        ], 200);
+        return response()->send('User Logged In Successfully', $user);
     }
 
     /**
@@ -119,8 +116,6 @@ class LoginController extends Controller
      */
     protected function loggedOut(Request $request)
     {
-        return response()->json([
-            'message' => 'Logged Out Successfully'
-        ], 200);
+        return response()->send('Logged Out Successfully');
     }
 }

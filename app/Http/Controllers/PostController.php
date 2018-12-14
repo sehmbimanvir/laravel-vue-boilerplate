@@ -15,9 +15,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::with('user:id,name')->latest()->get();
-        return response()->json([
-            'data' => $posts
-        ], 200);
+        return response()->send('Posts', $posts);
     }
 
     /**
@@ -33,10 +31,7 @@ class PostController extends Controller
             'description' => 'required'
         ]);
         Post::create($request->all());
-        return response()->json([
-            'data' => [],
-            'message' => 'Post Added Successfully'
-        ], 200);
+        return response()->send('Post Added Successfully');
     }
 
     /**
@@ -47,9 +42,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return response()->json([
-            'data' => $post
-        ], 200);
+        return response()->send('Data', $post);
     }
 
     /**
@@ -66,10 +59,7 @@ class PostController extends Controller
             'description' => 'required'
         ]);
         $post->update($request->all());
-        return response()->json([
-            'data' => [],
-            'message' => 'Post Successfully Updated'
-        ]);
+        return response()->send('Post Successfully Updated', $post);
     }
 
     /**
@@ -81,8 +71,6 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
-        return response()->json([
-            'message' => 'Post Deleted Successfully'
-        ], 200);
+        return response()->send('Post Deleted Successfully');
     }
 }

@@ -90,9 +90,6 @@ class RegisterController extends Controller
 
     protected function registered(Request $request, $user)
     {
-        return response()->json([
-            'message' => 'User Created Successfully',
-            'data' => $user
-        ], 200);
+        return response()->send('User Created Successfully', $user);
     }
 }

@@ -51,10 +51,7 @@ trait RestExceptionHandlerTrait
             default:
                 $response['message'] .= " In {$e->getFile()} On {$e->getLine()}";
         }
-        return response()->json([
-            'message' => $response['message'],
-            'data' => $response['data']
-        ], $response['code']);
+        return response()->send($response['message'], $response['data'], $response['code']);
     }
 
     protected function isCustomException(Exception $e)

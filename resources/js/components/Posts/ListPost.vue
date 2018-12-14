@@ -11,7 +11,7 @@
 
     <b-row>
       <b-col cols="12">
-        <b-table striped hover :items="posts" :fields="fields">
+        <b-table small="false" striped hover :items="posts" :fields="fields">
           <template slot="actions" slot-scope="data">
             <b-button-group>
               <b-button
