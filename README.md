@@ -1,4 +1,8 @@
 # Laravel & Vue Js Boilerplate
+<p align="center">
+    <img src="https://github.com/dev-manvir/laravel-vue-boilerplate/blob/master/logo.jpg?raw=true" />
+</p>
+
 Laravel Single Page Application Using Vue 2.5, Typescript, Eslint, Babel, SCSS etc.
 
 # Features
