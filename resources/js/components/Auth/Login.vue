@@ -39,8 +39,8 @@ export default {
   data () {
     return {
       credentials: {
-        email: 'admin@gmail.com',
-        password: '123456'
+        email: null,
+        password: null
       }
     }
   },
