@@ -1,4 +1,4 @@
-export const Storage = {
+const Storage = {
     prefix: 'laravel_vue',
 
     set (key, data) {
@@ -33,3 +33,5 @@ export const Storage = {
         }
     }
 }
+
+export { Storage }

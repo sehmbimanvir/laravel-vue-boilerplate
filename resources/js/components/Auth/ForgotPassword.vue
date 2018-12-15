@@ -8,7 +8,7 @@
 
     <b-row>
       <b-col cols="6" offset-md="3">
-        <b-form @submit="forgot">
+        <b-form @submit="onForgot">
           <b-form-group label="Registered Email Id" label-for="email">
             <b-form-input id="email" type="email" v-model="forgotPassword.email"/>
           </b-form-group>
@@ -28,6 +28,7 @@
   </b-container>
 </template>
 <script>
+import { mapActions } from 'vuex'
 export default {
   data () {
     return {
@@ -37,9 +38,12 @@ export default {
     }
   },
   methods: {
-    forgot (event) {
+    ...mapActions('AuthStore', [
+      'sendResetPasswordLink'
+    ]),
+    onForgot (event) {
       event.preventDefault()
-      this.$store.dispatch('AuthStore/sendResetPasswordLink', this.forgotPassword).then(response => {
+      this.sendResetPasswordLink(this.forgotPassword).then(response => {
         this.forgotPassword.email = null
         this.$toast.success({ title: 'Success', message: response.data.message })
       })

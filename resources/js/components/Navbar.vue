@@ -13,7 +13,7 @@
           <b-nav-item-dropdown right>
             <template slot="button-content">{{ user.name }}</template>
             <!-- <b-dropdown-item :to="{ name: 'Profile' }">Profile</b-dropdown-item> -->
-            <b-dropdown-item @click="logout()" href="javascript:void(0);">Logout</b-dropdown-item>
+            <b-dropdown-item @click="onLogout()" href="javascript:void(0);">Logout</b-dropdown-item>
           </b-nav-item-dropdown>
         </template>
       </b-navbar-nav>
@@ -21,7 +21,7 @@
   </b-navbar>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 export default {
   data () {
     return {
@@ -34,14 +34,17 @@ export default {
     ])
   },
   methods: {
+    ...mapActions('AuthStore', [
+      'logout'
+    ]),
     toggleNavbar () {
       this.collapsed = !this.collapsed
     },
     currentRoute (name) {
       return this.$route.name === name
     },
-    logout () {
-      this.$store.dispatch('AuthStore/logout').then(response => {
+    onLogout () {
+      this.logout().then(response => {
         this.$toast.success({ title: 'Success', message: response.data.message })
         this.$router.push({ name: 'Login' })
       })

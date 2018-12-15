@@ -11,7 +11,7 @@
 
     <b-row>
       <b-col cols="12">
-        <b-table small="false" striped hover :items="posts" :fields="fields">
+        <b-table striped hover :items="posts" :fields="fields">
           <template slot="actions" slot-scope="data">
             <b-button-group>
               <b-button
@@ -28,7 +28,7 @@
   </b-container>
 </template>
 <script>
-import { HTTP } from '../../services/http'
+import { Post } from '../../services/post'
 export default {
   data () {
     return {
@@ -61,14 +61,14 @@ export default {
   },
   methods: {
     getPosts () {
-      HTTP.get('post').then(response => {
+      Post.list().then(response => {
         this.posts = response.data.data
       })
     },
     deletePost (postId) {
       let e = confirm('Delete Post. Are you Sure ?')
       if (e) {
-        HTTP.delete(`post/${postId}`).then(response => {
+        Post.delete(postId).then(response => {
           let index = this.posts.findIndex(post => post.id === postId)
           this.posts.splice(index, 1)
           this.$toast.success({

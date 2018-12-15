@@ -8,13 +8,13 @@
 
     <b-row>
       <b-col cols="6" offset-md="3">
-        <b-form @submit="login">
+        <b-form @submit="onLogin">
           <b-form-group label="Email" label-for="email">
-            <b-form-input id="email" type="email" v-model="credentials.email"/>
+            <b-form-input required id="email" type="email" v-model="credentials.email"/>
           </b-form-group>
 
           <b-form-group label="Password" label-for="password">
-            <b-form-input id="password" type="password" v-model="credentials.password"/>
+            <b-form-input required id="password" type="password" v-model="credentials.password"/>
           </b-form-group>
 
           <b-button type="submit" variant="info">Login</b-button>
@@ -35,6 +35,7 @@
   </b-container>
 </template>
 <script>
+import { mapActions } from 'vuex'
 export default {
   data () {
     return {
@@ -47,9 +48,12 @@ export default {
   created () {
   },
   methods: {
-    login (event) {
+    ...mapActions('AuthStore', [
+      'login'
+    ]),
+    onLogin (event) {
       event.preventDefault()
-      this.$store.dispatch('AuthStore/login', this.credentials).then(response => {
+      this.login(this.credentials).then(response => {
         this.$router.push({ name: 'Home' })
       })
     }

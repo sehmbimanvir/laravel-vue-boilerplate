@@ -18,7 +18,7 @@
   </b-container>
 </template>
 <script>
-import { HTTP } from '../../services/http'
+import { Post } from '../../services/post'
 export default {
   data () {
     return {
@@ -32,7 +32,7 @@ export default {
   created () {
     if (this.$route.params.id) {
       this.routeId = this.$route.params.id
-      HTTP.get(`post/${this.routeId}`).then(response => {
+      Post.show(this.routeId).then(response => {
         this.post = response.data.data
       })
     }
@@ -42,11 +42,11 @@ export default {
       event.preventDefault()
       let promise = new Promise(resolve => {
         if (!this.routeId) {
-          HTTP.post('post', this.post).then(response => {
+          Post.store(this.post).then(response => {
             resolve(response.data)
           })
         } else {
-          HTTP.put(`post/${this.routeId}`, this.post).then(response => {
+          Post.update(this.post, this.routeId).then(response => {
             resolve(response.data)
           })
         }
