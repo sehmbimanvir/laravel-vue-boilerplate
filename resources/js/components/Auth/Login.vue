@@ -1,13 +1,13 @@
 <template>
   <b-container>
     <b-row>
-      <b-col cols="6" offset-md="3">
+      <b-col lg="6" md="6" sm="6" offset-lg="3" offset-md="3" offset-sm="3">
         <h2>Login</h2>
       </b-col>
     </b-row>
 
     <b-row>
-      <b-col cols="6" offset-md="3">
+      <b-col lg="6" md="6" sm="6" offset-lg="3" offset-md="3" offset-sm="3">
         <b-form @submit="onLogin">
           <b-form-group label="Email" label-for="email">
             <b-form-input required id="email" type="email" v-model="credentials.email"/>
@@ -23,7 +23,7 @@
     </b-row>
 
     <b-row>
-      <b-col cols="6" offset-md="3">
+      <b-col lg="6" md="6" sm="6" offset-lg="3" offset-md="3" offset-sm="3">
         <h6>
           <router-link :to="{ name: 'ForgotPassword' }">Forgot Password ?</router-link>
         </h6>

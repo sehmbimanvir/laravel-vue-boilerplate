@@ -12,7 +12,7 @@
           <b-nav-item :to="{ name: 'ListPost' }">Posts</b-nav-item>
           <b-nav-item-dropdown right>
             <template slot="button-content">{{ user.name }}</template>
-            <!-- <b-dropdown-item :to="{ name: 'Profile' }">Profile</b-dropdown-item> -->
+            <b-dropdown-item :to="{ name: 'Profile' }">Profile</b-dropdown-item>
             <b-dropdown-item @click="onLogout()" href="javascript:void(0);">Logout</b-dropdown-item>
           </b-nav-item-dropdown>
         </template>

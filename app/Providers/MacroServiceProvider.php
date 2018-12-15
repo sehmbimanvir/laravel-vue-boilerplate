@@ -29,6 +29,8 @@ class MacroServiceProvider extends ServiceProvider
 
     /**
      * Response Macro
+     * 
+     * @return void
      */
     private function registerResponseMacros()
     {

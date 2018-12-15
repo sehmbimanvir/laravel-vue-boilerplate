@@ -46,6 +46,7 @@ export default {
   }
   p {
     font-size: 13px;
+    margin-bottom: 0;
   }
   &.success {
     background: rgba(39, 174, 96, 0.7);

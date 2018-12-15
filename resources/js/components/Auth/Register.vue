@@ -1,13 +1,13 @@
 <template>
   <b-container>
     <b-row class="pb-3">
-      <b-col cols="6" offset-md="3">
+      <b-col lg="6" md="6" sm="6" offset-lg="3" offset-md="3" offset-sm="3">
         <h2>Register</h2>
       </b-col>
     </b-row>
 
     <b-row>
-      <b-col cols="6" offset-md="3">
+      <b-col lg="6" md="6" sm="6" offset-lg="3" offset-md="3" offset-sm="3">
         <b-form @submit="onRegister">
           <b-form-group label="Name" label-for="name">
             <b-form-input required id="name" type="text" v-model="user.name"/>
@@ -36,7 +36,7 @@
     </b-row>
 
     <b-row>
-      <b-col cols="6" offset-md="3">
+      <b-col lg="6" md="6" sm="6" offset-lg="3" offset-md="3" offset-sm="3">
         <h6>Already Registered ?
           <router-link :to="{name: 'Login'}">Click Here&nbsp;</router-link>to Login
         </h6>

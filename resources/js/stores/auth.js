@@ -21,6 +21,11 @@ const mutations = {
     state.user = {}
     state.isLoggedIn = false
     Storage.remove(['token', 'user'])
+  },
+  'UPDATEUSER' (state, data) {
+    state.user.name = data.name
+    state.user.email = data.email
+    Storage.setJSON('user', state.user)
   }
 }
 
