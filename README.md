@@ -35,8 +35,6 @@ Run DB Migrations & Seeds
 php artisan migrate --seed
 ```
 
-In **webpack.mix.js** replace **proxy** key with your site's root url
-
 Development Build
 ```sh
 npm run dev
