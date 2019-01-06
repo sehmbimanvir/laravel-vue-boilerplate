@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Database\Eloquent\FactoryBuilder;
 
 class MacroServiceProvider extends ServiceProvider
 {
@@ -15,6 +16,7 @@ class MacroServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerResponseMacros();
+        $this->registerFactoryMacros();
     }
 
     /**
@@ -39,6 +41,19 @@ class MacroServiceProvider extends ServiceProvider
                 'message' => $message,
                 'data' => $data
             ], $status);
+        });
+    }
+
+    /**
+     * Factory Macros
+     * 
+     * @return void
+     */
+    private function registerFactoryMacros()
+    {
+        FactoryBuilder::macro('noEvents', function () {
+            $this->class::flushEventListeners();
+            return $this;
         });
     }
 }

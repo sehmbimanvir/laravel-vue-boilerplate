@@ -27,6 +27,6 @@ mix.js('resources/js/app.js', 'public/js')
 .extract(['vue'])
 
 mix.browserSync({
-   proxy: 'laravel-blog.test',
+   proxy: process.env.APP_URL,
    notify: false
 })
