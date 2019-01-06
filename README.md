@@ -6,10 +6,10 @@
 Laravel Single Page Application Using Vue 2.5, Typescript, Eslint, Babel, SCSS etc.
 
 # Features
-- Easily Configurable
+- Easy to configure.
 - Single Page
 - Hot Reloading Enabled
-- Laravel Complete JWT Authentication Including Forgot Password, Account Activation etc.
+- Laravel Complete JWT Authentication Including Forgot, Reset Password.
 - Basic CRUD
 - Eslint Included for enforcing coding styles.
 - Custom Component and Plugin which can help developers to create their own plugins.
