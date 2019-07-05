@@ -1,6 +1,4 @@
 <?php
-
-use App\User;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,6 +9,7 @@ use App\User;
 | contains the "web" middleware group. Now create something great!
 |
  */
+
 Route::get('/{view?}', function () {
     return view('welcome');
 })->where('view', '.*');
