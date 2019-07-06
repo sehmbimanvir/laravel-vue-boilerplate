@@ -10,7 +10,7 @@
       <b-col lg="6" md="6" sm="6" offset-lg="3" offset-md="3" offset-sm="3">
         <b-form @submit="onForgot">
           <b-form-group label="Registered Email Id" label-for="email">
-            <b-form-input id="email" type="email" v-model="forgotPassword.email"/>
+            <b-form-input id="email" type="email" v-model="forgotPassword.email" />
           </b-form-group>
 
           <b-button type="submit" variant="info">Submit</b-button>
@@ -45,7 +45,11 @@ export default {
       event.preventDefault()
       this.sendResetPasswordLink(this.forgotPassword).then(response => {
         this.forgotPassword.email = null
-        this.$toast.success({ title: 'Success', message: response.data.message })
+        this.$bvToast.toast(response.data.message, {
+          title: 'Success',
+          variant: 'success',
+          solid: true
+        })
       })
     }
   }

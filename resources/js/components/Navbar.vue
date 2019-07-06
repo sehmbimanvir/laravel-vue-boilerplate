@@ -1,6 +1,6 @@
 <template>
   <b-navbar toggleable="md" type="dark" class="mb-5" variant="info">
-    <b-navbar-toggle target="nav_collapse"/>
+    <b-navbar-toggle target="nav_collapse" />
     <b-navbar-brand :to="{ name: 'Home' }">Laravel + Vue</b-navbar-brand>
     <b-collapse is-nav id="nav_collapse">
       <b-navbar-nav class="ml-auto">
@@ -45,7 +45,11 @@ export default {
     },
     onLogout () {
       this.logout().then(response => {
-        this.$toast.success({ title: 'Success', message: response.data.message })
+        this.$bvToast.toast(response.data.message, {
+          title: 'Success',
+          variant: 'success',
+          solid: true
+        })
         this.$router.push({ name: 'Login' })
       })
     }

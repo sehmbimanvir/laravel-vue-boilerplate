@@ -1,7 +1,7 @@
 <template>
   <div class="app">
-    <navbar/>
-    <router-view/>
+    <navbar />
+    <router-view />
   </div>
 </template>
 <script>
@@ -26,7 +26,11 @@ export default {
         let firstKey = Object.keys(response.data.data)[0]
         message = response.data.data[firstKey][0]
       }
-      this.$toast.error({ title: 'Error', message: message })
+      this.$bvToast.toast(message, {
+        title: 'Error',
+        variant: 'danger',
+        solid: true
+      })
     }
   }
 }

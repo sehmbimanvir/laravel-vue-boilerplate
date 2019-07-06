@@ -10,19 +10,15 @@
       <b-col lg="6" md="6" sm="6" offset-lg="3" offset-md="3" offset-sm="3">
         <b-form @submit="reset">
           <b-form-group label="Registered Email Id" label-for="email">
-            <b-form-input id="email" type="email" v-model="resetPasswordData.email"/>
+            <b-form-input id="email" type="email" v-model="resetPasswordData.email" />
           </b-form-group>
 
           <b-form-group label="Password" label-for="password">
-            <b-form-input id="password" type="password" v-model="resetPasswordData.password"/>
+            <b-form-input id="password" type="password" v-model="resetPasswordData.password" />
           </b-form-group>
 
           <b-form-group label="Confirm Password" label-for="password_confirmation">
-            <b-form-input
-              id="password_confirmation"
-              type="password"
-              v-model="resetPasswordData.password_confirmation"
-            />
+            <b-form-input id="password_confirmation" type="password" v-model="resetPasswordData.password_confirmation" />
           </b-form-group>
 
           <b-button type="submit" variant="info">Reset</b-button>
@@ -59,7 +55,11 @@ export default {
     reset (event) {
       event.preventDefault()
       this.resetPassword(this.resetPasswordData).then(response => {
-        this.$toast.success({ title: 'Success', message: response.data.message })
+        this.$bvToast.toast(response.data.message, {
+          title: 'Success',
+          variant: 'success',
+          solid: true
+        })
         this.$router.push({ name: 'Login' })
       })
     }

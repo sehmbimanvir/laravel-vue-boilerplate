@@ -5,10 +5,10 @@
       <b-col>
         <b-form @submit="savePost">
           <b-form-group>
-            <b-form-input placeholder="Title" type="text" v-model="post.title"/>
+            <b-form-input placeholder="Title" type="text" v-model="post.title" />
           </b-form-group>
           <b-form-group>
-            <b-form-textarea placeholder="Description" rows="3" v-model="post.description"/>
+            <b-form-textarea placeholder="Description" rows="3" v-model="post.description" />
           </b-form-group>
           <b-button type="submit" variant="info">Save</b-button>
           <b-button :to="{ name: 'ListPost' }" variant="outline-warning">Cancel</b-button>
@@ -52,9 +52,10 @@ export default {
         }
       })
       promise.then(response => {
-        this.$toast.success({
+        this.$bvToast.toast(response.message, {
           title: 'Success',
-          message: response.message
+          variant: 'success',
+          solid: true
         })
         this.$router.push({ name: 'ListPost' })
       })

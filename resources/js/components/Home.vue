@@ -1,6 +1,6 @@
 <template>
   <b-container>
-    <h1>Vue + Laravel Boilerplate</h1>
+    <h1>Vues + Laravel Boilerplate</h1>
     <template v-if="isLoggedIn">
       <h3>Welcome, {{ user.name }}</h3>
     </template>

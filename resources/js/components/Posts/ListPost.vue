@@ -14,11 +14,7 @@
         <b-table striped hover :items="posts" :fields="fields">
           <template slot="actions" slot-scope="data">
             <b-button-group>
-              <b-button
-                :to="{name: 'EditPost', params: {id: data.item.id}}"
-                size="sm"
-                variant="warning"
-              >Edit</b-button>
+              <b-button :to="{name: 'EditPost', params: {id: data.item.id}}" size="sm" variant="warning">Edit</b-button>
               <b-button @click="deletePost(data.item.id)" size="sm" variant="danger">Delete</b-button>
             </b-button-group>
           </template>
@@ -71,9 +67,10 @@ export default {
         Post.delete(postId).then(response => {
           let index = this.posts.findIndex(post => post.id === postId)
           this.posts.splice(index, 1)
-          this.$toast.success({
+          this.$bvToast.toast(response.data.message, {
             title: 'Success',
-            message: response.data.message
+            variant: 'success',
+            solid: true
           })
         })
       }
