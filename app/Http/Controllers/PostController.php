@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePost;
 use App\Post;
 use Illuminate\Http\Request;
 
@@ -24,12 +25,8 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePost $request)
     {
-        $request->validate([
-            'title' => 'required',
-            'description' => 'required'
-        ]);
         Post::create($request->all());
         return response()->send('Post Added Successfully');
     }
@@ -52,12 +49,8 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(StorePost $request, Post $post)
     {
-        $request->validate([
-            'title' => 'required',
-            'description' => 'required'
-        ]);
         $post->update($request->all());
         return response()->send('Post Successfully Updated', $post);
     }
